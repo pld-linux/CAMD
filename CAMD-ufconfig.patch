@@ -1,0 +1,153 @@
+diff -ur CAMD/Demo/camd_l_demo.c CAMD-uf/Demo/camd_l_demo.c
+--- CAMD/Demo/camd_l_demo.c	2007-05-03 17:16:55.000000000 +0200
++++ CAMD-uf/Demo/camd_l_demo.c	2007-12-02 18:02:54.000000000 +0100
+@@ -16,7 +16,7 @@
+ #include <stdlib.h>
+ 
+ /* define UF_long */
+-#include "UFconfig.h"
++#include <UFconfig.h>
+ 
+ int main (void)
+ {
+diff -ur CAMD/Demo/Makefile CAMD-uf/Demo/Makefile
+--- CAMD/Demo/Makefile	2007-05-05 16:25:26.000000000 +0200
++++ CAMD-uf/Demo/Makefile	2007-12-02 18:01:51.000000000 +0100
+@@ -4,13 +4,13 @@
+ 
+ default: camd_simple camd_demo camd_demo2 camd_l_demo
+ 
+-include ../../UFconfig/UFconfig.mk
++include /usr/share/misc/UFconfig.mk
+ 
+-C = $(CC) $(CFLAGS) $(CONFIG) -I../Include -I../../UFconfig
++C = $(CC) $(CFLAGS) $(CONFIG) -I../Include
+ 
+-UFCONFIG = ../../UFconfig/UFconfig.h
++UFCONFIG = /usr/share/misc/UFconfig.mk
+
+-INC = ../Include/camd.h $(UFCONFIG)
++INC = ../Include/camd.h
+ 
+ library:
+ 	( cd ../Lib ; $(MAKE) )
+diff -ur CAMD/Doc/Makefile CAMD-uf/Doc/Makefile
+--- CAMD/Doc/Makefile	2006-04-25 18:34:27.000000000 +0200
++++ CAMD-uf/Doc/Makefile	2007-12-02 18:01:59.000000000 +0100
+@@ -4,7 +4,7 @@
+ 
+ default: dist
+ 
+-include ../../UFconfig/UFconfig.mk
++include /usr/share/misc/UFconfig.mk
+ 
+ #------------------------------------------------------------------------------
+ # Remove all but the files in the original distribution
+diff -ur CAMD/Include/camd.h CAMD-uf/Include/camd.h
+--- CAMD/Include/camd.h	2007-05-04 17:11:54.000000000 +0200
++++ CAMD-uf/Include/camd.h	2007-12-02 18:03:19.000000000 +0100
+@@ -45,7 +45,7 @@
+ #include <stddef.h>
+ 
+ /* define UF_long */
+-#include "UFconfig.h"
++#include <UFconfig.h>
+ 
+ int amd_order		    /* returns AMD_OK, AMD_OK_BUT_JUMBLED,
+ 			     * AMD_INVALID, or AMD_OUT_OF_MEMORY */
+diff -ur CAMD/Include/camd_internal.h CAMD-uf/Include/camd_internal.h
+--- CAMD/Include/camd_internal.h	2007-05-03 17:26:14.000000000 +0200
++++ CAMD-uf/Include/camd_internal.h	2007-12-02 18:03:11.000000000 +0100
+@@ -162,7 +162,7 @@
+ /* ------------------------------------------------------------------------- */
+ 
+ /* define UF_long */
+-#include "UFconfig.h"
++#include <UFconfig.h>
+ 
+ #if defined (DLONG) || defined (ZLONG)
+ 
+diff -ur CAMD/Lib/Makefile CAMD-uf/Lib/Makefile
+--- CAMD/Lib/Makefile	2007-05-06 14:32:40.000000000 +0200
++++ CAMD-uf/Lib/Makefile	2007-12-02 18:02:11.000000000 +0100
+@@ -8,9 +8,9 @@
+ 
+ default: everything
+ 
+-include ../../UFconfig/UFconfig.mk
++include /usr/share/misc/UFconfig.mk
+ 
+-C = $(CC) $(CFLAGS) $(CONFIG) -I../Include -I../../UFconfig
++C = $(CC) $(CFLAGS) $(CONFIG) -I../Include
+ 
+ everything:
+ 	$(C) -DDINT -c ../Source/camd_aat.c -o camd_i_aat.o
+diff -ur CAMD/Makefile CAMD-uf/Makefile
+--- CAMD/Makefile	2007-05-05 19:23:47.000000000 +0200
++++ CAMD-uf/Makefile	2007-12-02 18:02:33.000000000 +0100
+@@ -4,7 +4,7 @@
+ 
+ default: demo
+ 
+-include ../UFconfig/UFconfig.mk
++include /usr/share/misc/UFconfig.mk
+ 
+ # Compile all C code, including the C-callable routines.
+ # Do not compile the FORTRAN versions, or MATLAB interface.
+diff -ur CAMD/MATLAB/camd_mex.c CAMD-uf/MATLAB/camd_mex.c
+--- CAMD/MATLAB/camd_mex.c	2007-05-03 17:22:16.000000000 +0200
++++ CAMD-uf/MATLAB/camd_mex.c	2007-12-02 18:03:32.000000000 +0100
+@@ -30,7 +30,7 @@
+ #include "camd.h"
+ #include "mex.h"
+ #include "matrix.h"
+-#include "UFconfig.h"
++#include <UFconfig.h>
+ 
+ void mexFunction
+ (
+diff -ur CAMD/MATLAB/Makefile CAMD-uf/MATLAB/Makefile
+--- CAMD/MATLAB/Makefile	2007-05-03 16:02:45.000000000 +0200
++++ CAMD-uf/MATLAB/Makefile	2007-12-02 18:02:24.000000000 +0100
+@@ -4,13 +4,13 @@
+ 
+ default: amd2
+ 
+-include ../../UFconfig/UFconfig.mk
++include /usr/share/misc/UFconfig.mk
+ 
+ CAMD = ../Lib/libcamd.a
+ 
+-I = -I../Include -I../../UFconfig
++I = -I../Include
+ 
+-INC = ../Include/camd.h ../Include/camd_internal.h ../../UFconfig/UFconfig.h
++INC = ../Include/camd.h ../Include/camd_internal.h
+ 
+ SRC = ../Source/camd_1.c ../Source/camd_2.c ../Source/camd_aat.c \
+     ../Source/camd_control.c ../Source/camd_defaults.c ../Source/camd_dump.c \
+--- CAMD/Lib/GNUmakefile~	2007-05-06 14:32:19.000000000 +0200
++++ CAMD/Lib/GNUmakefile	2007-12-02 18:23:35.000000000 +0100
+@@ -4,9 +4,9 @@
+ 
+ default: ../Lib/libamd.a
+ 
+-include ../../UFconfig/UFconfig.mk
++include /usr/share/misc/UFconfig.mk
+ 
+-C = $(CC) $(CFLAGS) $(CONFIG) -I../Include -I../../UFconfig
++C = $(CC) $(CFLAGS) $(CONFIG) -I../Include
+ 
+ #-------------------------------------------------------------------------------
+ # source files
+@@ -15,9 +15,7 @@
+ CAMD = camd_aat camd_1 camd_2 camd_dump camd_postorder camd_post_tree camd_defaults \
+ 	camd_order camd_control camd_info camd_valid camd_preprocess
+ 
+-UFCONFIG = ../../UFconfig/UFconfig.h
+-
+-INC = ../Include/camd.h ../Include/camd_internal.h $(UFCONFIG)
++INC = ../Include/camd.h ../Include/camd_internal.h
+ 
+ #-------------------------------------------------------------------------------
+ # object files for each version
