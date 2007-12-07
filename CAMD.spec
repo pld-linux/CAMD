@@ -1,4 +1,4 @@
-Summary:	CAMD: constrainted approximate minimum degree
+Summary:	CAMD: Constrainted Approximate Minimum Degree
 Name:		CAMD
 Version:	2.2.0
 Release:	2
@@ -14,8 +14,8 @@ BuildRequires:	libtool >= 2:1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-CAMD is a set of routines for ordering a sparse matrix prior
-to Cholesky factorization (or for LU factorization with diagonal
+CAMD is a set of routines for ordering a sparse matrix prior to
+Cholesky factorization (or for LU factorization with diagonal
 pivoting).
 
 %package devel
