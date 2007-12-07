@@ -58,13 +58,13 @@ Statyczna biblioteka camd.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_includedir}
+install -d $RPM_BUILD_ROOT%{_includedir}/camd
 
 %{__make} -C Lib install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	libdir=%{_libdir}
 
-install Include/* $RPM_BUILD_ROOT%{_includedir}
+install Include/*.h $RPM_BUILD_ROOT%{_includedir}/camd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -81,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcamd.so
 %{_libdir}/libcamd.la
-%{_includedir}/*
+%{_includedir}/camd
 
 %files static
 %defattr(644,root,root,755)
