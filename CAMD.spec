@@ -1,7 +1,7 @@
 Summary:	CAMD: constrainted approximate minimum degree
 Name:		CAMD
 Version:	2.2.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.cise.ufl.edu/research/sparse/camd/%{name}-%{version}.tar.gz
