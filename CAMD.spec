@@ -19,29 +19,29 @@ to Cholesky factorization (or for LU factorization with diagonal
 pivoting).
 
 %package devel
-Summary:	Header files for camd library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki camd
+Summary:	Header files for CAMD library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki CAMD
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	UFconfig
 
 %description devel
-Header files for camd library.
+Header files for CAMD library.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki camd.
+Pliki nagłówkowe biblioteki CAMD.
 
 %package static
-Summary:	Static camd library
-Summary(pl.UTF-8):	Statyczna biblioteka camd
+Summary:	Static CAMD library
+Summary(pl.UTF-8):	Statyczna biblioteka CAMD
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static camd library.
+Static CAMD library.
 
 %description static -l pl.UTF-8
-Statyczna biblioteka camd.
+Statyczna biblioteka CAMD.
 
 %prep
 %setup -q -n %{name}
