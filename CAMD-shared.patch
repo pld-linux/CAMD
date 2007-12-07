@@ -6,25 +6,25 @@ diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
  
  camd_demo: camd_demo.c library $(INC)
 -	$(C) -o camd_demo camd_demo.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_demo camd_demo.c ../Lib/libcamd.la $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_demo camd_demo.c ../Lib/libcamd.la $(LIB)
  	./camd_demo > my_camd_demo.out
  	- diff camd_demo.out my_camd_demo.out
  
  camd_l_demo: camd_l_demo.c library $(INC)
 -	$(C) -o camd_l_demo camd_l_demo.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_l_demo camd_l_demo.c ../Lib/libcamd.la $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_l_demo camd_l_demo.c ../Lib/libcamd.la $(LIB)
  	./camd_l_demo > my_camd_l_demo.out
  	- diff camd_l_demo.out my_camd_l_demo.out
  
  camd_demo2: camd_demo2.c library $(INC)
 -	$(C) -o camd_demo2 camd_demo2.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_demo2 camd_demo2.c ../Lib/libcamd.la $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_demo2 camd_demo2.c ../Lib/libcamd.la $(LIB)
  	./camd_demo2 > my_camd_demo2.out
  	- diff camd_demo2.out my_camd_demo2.out
  
  camd_simple: camd_simple.c library $(INC)
 -	$(C) -o camd_simple camd_simple.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_simple camd_simple.c ../Lib/libcamd.la $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_simple camd_simple.c ../Lib/libcamd.la $(LIB)
  	./camd_simple > my_camd_simple.out
  	- diff camd_simple.out my_camd_simple.out
  
@@ -63,7 +63,7 @@ diff -ur camd/Lib/GNUmakefile camd-shared/Lib/GNUmakefile
 -	$(AR) libcamd.a $^
 -	- $(RANLIB) libcamd.a
 +libcamd.la: camd_global.o $(CAMDI) $(CAMDL)
-+	libtool --tag=CC --mode=link $(CC) -o libcamd.la -rpath $(libdir) $^ -lm
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) -o libcamd.la -rpath $(libdir) $^ -lm
 +
 +install: libcamd.la
 +	install -d $(DESTDIR)$(libdir)
