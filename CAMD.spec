@@ -53,6 +53,7 @@ Statyczna biblioteka camd.
 	CC="%{__cc}" \
 	F77="gfortran" \
 	CFLAGS="%{rpmcflags} -fPIC" \
+	LDFLAGS="%{rpmldflags}" \
 	libdir=%{_libdir}
 
 %install
