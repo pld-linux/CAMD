@@ -1,0 +1,79 @@
+diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
+--- camd/Demo/Makefile	2007-12-02 19:00:33.000000000 +0100
++++ camd-shared/Demo/Makefile	2007-12-02 18:55:08.000000000 +0100
+@@ -23,22 +23,22 @@
+ dist:
+ 
+ camd_demo: camd_demo.c library $(INC)
+-	$(C) -o camd_demo camd_demo.c ../Lib/libcamd.a $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_demo camd_demo.c ../Lib/libcamd.la $(LIB)
+ 	./camd_demo > my_camd_demo.out
+ 	- diff camd_demo.out my_camd_demo.out
+ 
+ camd_l_demo: camd_l_demo.c library $(INC)
+-	$(C) -o camd_l_demo camd_l_demo.c ../Lib/libcamd.a $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_l_demo camd_l_demo.c ../Lib/libcamd.la $(LIB)
+ 	./camd_l_demo > my_camd_l_demo.out
+ 	- diff camd_l_demo.out my_camd_l_demo.out
+ 
+ camd_demo2: camd_demo2.c library $(INC)
+-	$(C) -o camd_demo2 camd_demo2.c ../Lib/libcamd.a $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_demo2 camd_demo2.c ../Lib/libcamd.la $(LIB)
+ 	./camd_demo2 > my_camd_demo2.out
+ 	- diff camd_demo2.out my_camd_demo2.out
+ 
+ camd_simple: camd_simple.c library $(INC)
+-	$(C) -o camd_simple camd_simple.c ../Lib/libcamd.a $(LIB)
++	libtool --tag=CC --mode=link $(CC) $(CFLAGS) -I../Include -o camd_simple camd_simple.c ../Lib/libcamd.la $(LIB)
+ 	./camd_simple > my_camd_simple.out
+ 	- diff camd_simple.out my_camd_simple.out
+ 
+diff -ur camd/Lib/GNUmakefile camd-shared/Lib/GNUmakefile
+--- camd/Lib/GNUmakefile	2007-12-02 19:00:35.000000000 +0100
++++ camd-shared/Lib/GNUmakefile	2007-12-02 18:59:22.000000000 +0100
+@@ -2,7 +2,7 @@
+ # CAMD Makefile for compiling on Unix systems (for GNU make only)
+ #-------------------------------------------------------------------------------
+ 
+-default: libcamd.a
++default: libcamd.la
+ 
+ include /usr/share/misc/UFconfig.mk
+ 
+@@ -29,21 +29,24 @@
+ #-------------------------------------------------------------------------------
+ 
+ camd_global.o: ../Source/camd_global.c $(INC)
+-	$(C) -c $< -o $@
++	libtool --tag=CC --mode=compile $(CC) $(CFLAGS) $(CONFIG) -I../Include -c $< -o $@
+ 
+ camd_i_%.o: ../Source/camd_%.c $(INC)
+-	$(C) -DDINT -c $< -o $@
++	libtool --tag=CC --mode=compile $(CC) -DDINT $(CFLAGS) $(CONFIG) -I../Include -c $< -o $@
+ 
+ camd_l_%.o: ../Source/camd_%.c $(INC)
+-	$(C) -DDLONG -c $< -o $@
++	libtool --tag=CC --mode=compile $(CC) -DDLONG $(CFLAGS) $(CONFIG) -I../Include -c $< -o $@
+ 
+ #-------------------------------------------------------------------------------
+ # Create the libcamd.a library (C versions only)
+ #-------------------------------------------------------------------------------
+ 
+-libcamd.a: camd_global.o $(CAMDI) $(CAMDL)
+-	$(AR) libcamd.a $^
+-	- $(RANLIB) libcamd.a
++libcamd.la: camd_global.o $(CAMDI) $(CAMDL)
++	libtool --tag=CC --mode=link $(CC) -o libcamd.la -rpath $(libdir) $^ -lm
++
++install: libcamd.la
++	install -d $(DESTDIR)$(libdir)
++	libtool --mode=install cp libcamd.la $(DESTDIR)$(libdir)/libcamd.la
+ 
+ #-------------------------------------------------------------------------------
+ # Remove all but the files in the original distribution
+@@ -73,4 +71,4 @@
+ purge: distclean
+ 
+ distclean: clean
+-	- $(RM) libcamd.a
++	- $(RM) libcamd.la
