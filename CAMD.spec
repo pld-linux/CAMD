@@ -1,5 +1,5 @@
 Summary:	CAMD: Constrainted Approximate Minimum Degree
-Summary(pl.UTF-8):	CAMD: Constrained Approximate Minimum Degree (ograniczony przybliżony minimalny stopień)
+Summary(pl.UTF-8):	CAMD - przybliżony ograniczony algorytm minimalnego stopnia
 Name:		CAMD
 Version:	2.2.0
 Release:	2
