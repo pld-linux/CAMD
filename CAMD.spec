@@ -1,4 +1,5 @@
 Summary:	CAMD: Constrainted Approximate Minimum Degree
+Summary(pl.UTF-8):	CAMD: Constrained Approximate Minimum Degree (ograniczony przybliżony minimalny stopień)
 Name:		CAMD
 Version:	2.2.0
 Release:	2
@@ -10,6 +11,7 @@ Patch0:		%{name}-ufconfig.patch
 Patch1:		%{name}-shared.patch
 URL:		http://www.cise.ufl.edu/research/sparse/camd/
 BuildRequires:	UFconfig
+BuildRequires:	gcc-fortran
 BuildRequires:	libtool >= 2:1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -17,6 +19,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 CAMD is a set of routines for ordering a sparse matrix prior to
 Cholesky factorization (or for LU factorization with diagonal
 pivoting).
+
+%description -l pl.UTF-8
+CAMD to zbiór procedur do porządkowania macierzy rzadkich przed
+rozkładem Cholesky'ego (lub do rozkładu LU z obrotami diagonalnymi).
 
 %package devel
 Summary:	Header files for CAMD library
