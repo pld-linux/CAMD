@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	CAMD: Constrained Approximate Minimum Degree (ograniczony prz
 Name:		CAMD
 Version:	2.2.0
 Release:	2
-License:	LGPL
+License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.cise.ufl.edu/research/sparse/camd/%{name}-%{version}.tar.gz
 # Source0-md5:	d80d35bbdb113da3d79e8b52d7b32144
@@ -82,6 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.txt
 %attr(755,root,root) %{_libdir}/libcamd.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcamd.so.0
 
 %files devel
 %defattr(644,root,root,755)
