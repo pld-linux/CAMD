@@ -80,12 +80,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.txt
+%doc README.txt Doc/{ChangeLog,License}
 %attr(755,root,root) %{_libdir}/libcamd.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libcamd.so.0
 
 %files devel
 %defattr(644,root,root,755)
+%doc CAMD_UserGuide.pdf
 %attr(755,root,root) %{_libdir}/libcamd.so
 %{_libdir}/libcamd.la
 %{_includedir}/camd
