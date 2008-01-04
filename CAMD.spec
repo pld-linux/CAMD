@@ -11,7 +11,6 @@ Patch0:		%{name}-ufconfig.patch
 Patch1:		%{name}-shared.patch
 URL:		http://www.cise.ufl.edu/research/sparse/camd/
 BuildRequires:	UFconfig
-BuildRequires:	gcc-fortran
 BuildRequires:	libtool >= 2:1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -57,8 +56,7 @@ Statyczna biblioteka CAMD.
 %build
 %{__make} \
 	CC="%{__cc}" \
-	F77="gfortran" \
-	CFLAGS="%{rpmcflags} -fPIC" \
+	CFLAGS="%{rpmcflags}" \
 	LDFLAGS="%{rpmldflags}" \
 	libdir=%{_libdir}
 
@@ -86,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc CAMD_UserGuide.pdf
+%doc Doc/CAMD_UserGuide.pdf
 %attr(755,root,root) %{_libdir}/libcamd.so
 %{_libdir}/libcamd.la
 %{_includedir}/camd
