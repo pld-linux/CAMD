@@ -63,7 +63,7 @@ diff -ur camd/Lib/GNUmakefile camd-shared/Lib/GNUmakefile
 -	$(AR) libcamd.a $^
 -	- $(RANLIB) libcamd.a
 +libcamd.la: camd_global.o $(CAMDI) $(CAMDL)
-+	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) -o libcamd.la -rpath $(libdir) $^ -lm
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) -o libcamd.la -rpath $(libdir) $(^:.o=.lo) -lm
 +
 +install: libcamd.la
 +	install -d $(DESTDIR)$(libdir)
