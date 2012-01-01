@@ -28,9 +28,8 @@ diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
  	./camd_simple > my_camd_simple.out
  	- diff camd_simple.out my_camd_simple.out
  
-diff -ur camd/Lib/GNUmakefile camd-shared/Lib/GNUmakefile
---- camd/Lib/GNUmakefile	2007-12-02 19:00:35.000000000 +0100
-+++ camd-shared/Lib/GNUmakefile	2007-12-02 18:59:22.000000000 +0100
+--- CAMD/Lib/GNUmakefile.orig	2012-01-01 13:54:50.662901345 +0100
++++ CAMD/Lib/GNUmakefile	2012-01-01 14:04:33.546254197 +0100
 @@ -2,7 +2,7 @@
  # CAMD Makefile for compiling on Unix systems (for GNU make only)
  #-------------------------------------------------------------------------------
@@ -45,22 +44,22 @@ diff -ur camd/Lib/GNUmakefile camd-shared/Lib/GNUmakefile
  
  camd_global.o: ../Source/camd_global.c $(INC)
 -	$(C) -c $< -o $@
-+	libtool --tag=CC --mode=compile $(CC) $(CFLAGS) $(CONFIG) -I../Include -c $< -o $@
++	libtool --tag=CC --mode=compile $(C) -c $< -o $@
  
  camd_i_%.o: ../Source/camd_%.c $(INC)
 -	$(C) -DDINT -c $< -o $@
-+	libtool --tag=CC --mode=compile $(CC) -DDINT $(CFLAGS) $(CONFIG) -I../Include -c $< -o $@
++	libtool --tag=CC --mode=compile $(C) -DDINT -c $< -o $@
  
  camd_l_%.o: ../Source/camd_%.c $(INC)
 -	$(C) -DDLONG -c $< -o $@
-+	libtool --tag=CC --mode=compile $(CC) -DDLONG $(CFLAGS) $(CONFIG) -I../Include -c $< -o $@
++	libtool --tag=CC --mode=compile $(C) -DDLONG -c $< -o $@
  
  #-------------------------------------------------------------------------------
  # Create the libcamd.a library (C versions only)
  #-------------------------------------------------------------------------------
  
 -libcamd.a: camd_global.o $(CAMDI) $(CAMDL)
--	$(AR) libcamd.a $^
+-	$(ARCHIVE)  libcamd.a $^
 -	- $(RANLIB) libcamd.a
 +libcamd.la: camd_global.o $(CAMDI) $(CAMDL)
 +	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) -o libcamd.la -rpath $(libdir) $(^:.o=.lo) -lm
@@ -71,7 +70,7 @@ diff -ur camd/Lib/GNUmakefile camd-shared/Lib/GNUmakefile
  
  #-------------------------------------------------------------------------------
  # Remove all but the files in the original distribution
-@@ -73,4 +71,4 @@
+@@ -55,4 +58,4 @@
  purge: distclean
  
  distclean: clean

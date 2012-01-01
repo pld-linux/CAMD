@@ -10,9 +10,8 @@ diff -ur CAMD/Demo/camd_l_demo.c CAMD-uf/Demo/camd_l_demo.c
  
  int main (void)
  {
-diff -ur CAMD/Demo/Makefile CAMD-uf/Demo/Makefile
---- CAMD/Demo/Makefile	2007-05-05 16:25:26.000000000 +0200
-+++ CAMD-uf/Demo/Makefile	2007-12-02 18:01:51.000000000 +0100
+--- CAMD/Demo/Makefile.orig	2011-12-08 17:12:27.000000000 +0100
++++ CAMD/Demo/Makefile	2012-01-01 13:52:29.406229949 +0100
 @@ -4,13 +4,13 @@
  
  default: camd_simple camd_demo camd_demo2 camd_l_demo
@@ -20,12 +19,12 @@ diff -ur CAMD/Demo/Makefile CAMD-uf/Demo/Makefile
 -include ../../UFconfig/UFconfig.mk
 +include /usr/share/misc/UFconfig.mk
  
--C = $(CC) $(CFLAGS) $(CONFIG) -I../Include -I../../UFconfig
-+C = $(CC) $(CFLAGS) $(CONFIG) -I../Include
+-C = $(CC) $(CF) -I../Include -I../../UFconfig
++C = $(CC) $(CF) -I../Include
  
 -UFCONFIG = ../../UFconfig/UFconfig.h
 +UFCONFIG = /usr/share/misc/UFconfig.mk
-
+ 
 -INC = ../Include/camd.h $(UFCONFIG)
 +INC = ../Include/camd.h
  
@@ -67,9 +66,8 @@ diff -ur CAMD/Include/camd_internal.h CAMD-uf/Include/camd_internal.h
  
  #if defined (DLONG) || defined (ZLONG)
  
-diff -ur CAMD/Lib/Makefile CAMD-uf/Lib/Makefile
---- CAMD/Lib/Makefile	2007-05-06 14:32:40.000000000 +0200
-+++ CAMD-uf/Lib/Makefile	2007-12-02 18:02:11.000000000 +0100
+--- CAMD/Lib/Makefile.orig	2011-12-08 18:36:42.000000000 +0100
++++ CAMD/Lib/Makefile	2012-01-01 13:52:49.706230628 +0100
 @@ -8,9 +8,9 @@
  
  default: everything
@@ -77,8 +75,8 @@ diff -ur CAMD/Lib/Makefile CAMD-uf/Lib/Makefile
 -include ../../UFconfig/UFconfig.mk
 +include /usr/share/misc/UFconfig.mk
  
--C = $(CC) $(CFLAGS) $(CONFIG) -I../Include -I../../UFconfig
-+C = $(CC) $(CFLAGS) $(CONFIG) -I../Include
+-C = $(CC) $(CF) -I../Include -I../../UFconfig
++C = $(CC) $(CF) -I../Include
  
  everything:
  	$(C) -DDINT -c ../Source/camd_aat.c -o camd_i_aat.o
@@ -126,22 +124,22 @@ diff -ur CAMD/MATLAB/Makefile CAMD-uf/MATLAB/Makefile
  
  SRC = ../Source/camd_1.c ../Source/camd_2.c ../Source/camd_aat.c \
      ../Source/camd_control.c ../Source/camd_defaults.c ../Source/camd_dump.c \
---- CAMD/Lib/GNUmakefile~	2007-05-06 14:32:19.000000000 +0200
-+++ CAMD/Lib/GNUmakefile	2007-12-02 18:23:35.000000000 +0100
+--- CAMD/Lib/GNUmakefile.orig	2011-12-08 18:36:27.000000000 +0100
++++ CAMD/Lib/GNUmakefile	2012-01-01 13:53:05.949564506 +0100
 @@ -4,9 +4,9 @@
  
- default: ../Lib/libamd.a
+ default: libcamd.a
  
 -include ../../UFconfig/UFconfig.mk
 +include /usr/share/misc/UFconfig.mk
  
--C = $(CC) $(CFLAGS) $(CONFIG) -I../Include -I../../UFconfig
-+C = $(CC) $(CFLAGS) $(CONFIG) -I../Include
+-C = $(CC) $(CF) -I../Include -I../../UFconfig
++C = $(CC) $(CF) -I../Include
  
  #-------------------------------------------------------------------------------
  # source files
-@@ -15,9 +15,7 @@
- CAMD = camd_aat camd_1 camd_2 camd_dump camd_postorder camd_post_tree camd_defaults \
+@@ -15,9 +15,7 @@ C = $(CC) $(CF) -I../Include -I../../UFc
+ CAMD = camd_aat camd_1 camd_2 camd_dump camd_postorder camd_defaults \
  	camd_order camd_control camd_info camd_valid camd_preprocess
  
 -UFCONFIG = ../../UFconfig/UFconfig.h
