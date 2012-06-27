@@ -37,7 +37,7 @@ diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
 -default: libcamd.a
 +default: libcamd.la
  
- include /usr/share/misc/UFconfig.mk
+ include /usr/share/misc/SuiteSparse_config.mk
  
 @@ -29,21 +29,24 @@
  #-------------------------------------------------------------------------------
