@@ -1,35 +1,34 @@
-diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
---- camd/Demo/Makefile	2007-12-02 19:00:33.000000000 +0100
-+++ camd-shared/Demo/Makefile	2007-12-02 18:55:08.000000000 +0100
-@@ -23,22 +23,22 @@
+--- CAMD/Demo/Makefile.orig	2014-10-01 20:15:40.452951732 +0200
++++ CAMD/Demo/Makefile	2014-10-01 20:40:07.992890145 +0200
+@@ -22,22 +22,22 @@
  dist:
  
  camd_demo: camd_demo.c library $(INC)
--	$(C) -o camd_demo camd_demo.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_demo camd_demo.c ../Lib/libcamd.la $(LIB)
+-	$(C) -o camd_demo camd_demo.c ../Lib/libcamd.a $(LIB2)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_demo camd_demo.c ../Lib/libcamd.la $(LIB2)
  	./camd_demo > my_camd_demo.out
  	- diff camd_demo.out my_camd_demo.out
  
  camd_l_demo: camd_l_demo.c library $(INC)
--	$(C) -o camd_l_demo camd_l_demo.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_l_demo camd_l_demo.c ../Lib/libcamd.la $(LIB)
+-	$(C) -o camd_l_demo camd_l_demo.c ../Lib/libcamd.a $(LIB2)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_l_demo camd_l_demo.c ../Lib/libcamd.la $(LIB2)
  	./camd_l_demo > my_camd_l_demo.out
  	- diff camd_l_demo.out my_camd_l_demo.out
  
  camd_demo2: camd_demo2.c library $(INC)
--	$(C) -o camd_demo2 camd_demo2.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_demo2 camd_demo2.c ../Lib/libcamd.la $(LIB)
+-	$(C) -o camd_demo2 camd_demo2.c ../Lib/libcamd.a $(LIB2)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_demo2 camd_demo2.c ../Lib/libcamd.la $(LIB2)
  	./camd_demo2 > my_camd_demo2.out
  	- diff camd_demo2.out my_camd_demo2.out
  
  camd_simple: camd_simple.c library $(INC)
--	$(C) -o camd_simple camd_simple.c ../Lib/libcamd.a $(LIB)
-+	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_simple camd_simple.c ../Lib/libcamd.la $(LIB)
+-	$(C) -o camd_simple camd_simple.c ../Lib/libcamd.a $(LIB2)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) $(CFLAGS) -I../Include -o camd_simple camd_simple.c ../Lib/libcamd.la $(LIB2)
  	./camd_simple > my_camd_simple.out
  	- diff camd_simple.out my_camd_simple.out
  
---- CAMD/Lib/GNUmakefile.orig	2012-01-01 13:54:50.662901345 +0100
-+++ CAMD/Lib/GNUmakefile	2012-01-01 14:04:33.546254197 +0100
+--- CAMD/Lib/GNUmakefile.orig	2014-10-01 20:15:40.442951733 +0200
++++ CAMD/Lib/GNUmakefile	2014-10-01 20:41:30.242886694 +0200
 @@ -2,7 +2,7 @@
  # CAMD Makefile for compiling on Unix systems (for GNU make only)
  #-------------------------------------------------------------------------------
@@ -39,12 +38,8 @@ diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
  
  include /usr/share/misc/SuiteSparse_config.mk
  
-@@ -29,21 +29,24 @@
+@@ -29,18 +29,21 @@
  #-------------------------------------------------------------------------------
- 
- camd_global.o: ../Source/camd_global.c $(INC)
--	$(C) -c $< -o $@
-+	libtool --tag=CC --mode=compile $(C) -c $< -o $@
  
  camd_i_%.o: ../Source/camd_%.c $(INC)
 -	$(C) -DDINT -c $< -o $@
@@ -58,19 +53,19 @@ diff -ur camd/Demo/Makefile camd-shared/Demo/Makefile
  # Create the libcamd.a library (C versions only)
  #-------------------------------------------------------------------------------
  
--libcamd.a: camd_global.o $(CAMDI) $(CAMDL)
+-libcamd.a: $(CAMDI) $(CAMDL)
 -	$(ARCHIVE)  libcamd.a $^
 -	- $(RANLIB) libcamd.a
-+libcamd.la: camd_global.o $(CAMDI) $(CAMDL)
-+	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) -o libcamd.la -rpath $(libdir) $(^:.o=.lo) -lm
++libcamd.la: $(CAMDI) $(CAMDL)
++	libtool --tag=CC --mode=link $(CC) $(LDFLAGS) -o libcamd.la -rpath $(libdir) $(^:.o=.lo) -lsuitesparseconfig -lm
 +
 +install: libcamd.la
 +	install -d $(DESTDIR)$(libdir)
-+	libtool --mode=install cp libcamd.la $(DESTDIR)$(libdir)/libcamd.la
++	libtool --mode=install install libcamd.la $(DESTDIR)$(libdir)
  
  #-------------------------------------------------------------------------------
  # Remove all but the files in the original distribution
-@@ -55,4 +58,4 @@
+@@ -52,4 +55,4 @@
  purge: distclean
  
  distclean: clean

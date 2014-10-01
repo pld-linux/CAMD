@@ -1,6 +1,6 @@
 --- CAMD/Demo/Makefile.orig	2012-05-27 01:23:01.000000000 +0200
 +++ CAMD/Demo/Makefile	2012-06-27 16:48:20.148813310 +0200
-@@ -4,11 +4,11 @@
+@@ -4,16 +4,15 @@
  
  default: camd_simple camd_demo camd_demo2 camd_l_demo
  
@@ -13,8 +13,14 @@
 -INC = ../Include/camd.h ../../SuiteSparse_config/SuiteSparse_config.h
 +INC = ../Include/camd.h
  
+-LIB2 = ../../SuiteSparse_config/libsuitesparseconfig.a $(LIB)
++LIB2 = -lsuitesparseconfig $(LIB)
+ 
  library:
+-	( cd ../../SuiteSparse_config ; $(MAKE) )
  	( cd ../Lib ; $(MAKE) )
+ 
+ #------------------------------------------------------------------------------
 diff -ur CAMD/Doc/Makefile CAMD-uf/Doc/Makefile
 --- CAMD/Doc/Makefile	2006-04-25 18:34:27.000000000 +0200
 +++ CAMD-uf/Doc/Makefile	2007-12-02 18:01:59.000000000 +0100
