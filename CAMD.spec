@@ -2,7 +2,7 @@ Summary:	CAMD: Constrainted Approximate Minimum Degree
 Summary(pl.UTF-8):	CAMD - przybliżony ograniczony algorytm minimalnego stopnia
 Name:		CAMD
 Version:	2.4.0
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.cise.ufl.edu/research/sparse/camd/%{name}-%{version}.tar.gz
@@ -10,7 +10,7 @@ Source0:	http://www.cise.ufl.edu/research/sparse/camd/%{name}-%{version}.tar.gz
 Patch0:		%{name}-ufconfig.patch
 Patch1:		%{name}-shared.patch
 URL:		http://www.cise.ufl.edu/research/sparse/camd/
-BuildRequires:	SuiteSparse_config >= 4.3.0
+BuildRequires:	SuiteSparse_config-devel >= 4.3.0
 BuildRequires:	libtool >= 2:1.5
 Requires:	SuiteSparse_config-libs >= 4.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
